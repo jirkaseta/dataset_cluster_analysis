@@ -75,10 +75,19 @@ for cluster in clusters:
     print(mean.sort_values().to_string())
     
     # average deviation of features
-    diff=original_mean-mean
-    lower=original_mean-Data.min()
+    diff=mean-original_mean
+    # get maximal difference
+    lower_min=abs(original_mean-Data.min())
+    lower_max=abs(original_mean-Data.max())
+
+    for i,value in diff.iteritems():
+        if value < 0:
+            diff.at[i]=value/lower_min[i]*100
+        else:
+            diff.at[i]=value/lower_max[i]*100
+
     print(color.BOLD +color.BLUE+'\nAverage deviation of features (%):'+ color.END)
-    print((-1*(diff/lower)*100).sort_values().to_string())
+    print(diff.sort_values().to_string())
     
     # correlation of features
     print(color.BOLD +color.BLUE+'\nCorrelation of features:'+ color.END)
