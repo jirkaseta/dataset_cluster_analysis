@@ -2,6 +2,7 @@ import pandas as pd
 import sys
 import h2o
 from h2o.estimators import H2OKMeansEstimator
+import seaborn as sns
 
 # some colors for textual representation
 class color:
@@ -15,6 +16,8 @@ Data = pd.read_csv(sys.argv[1])
 
 # remove text column
 Data.pop('Dataset')
+#Data.pop('domain')
+#Data.rename(columns={'metric_entropy':"met_ent"},inplace=True)
 
 # convert to numpy and show data
 sample_np=Data.values
@@ -57,6 +60,9 @@ for x in range(0,number_of_clusters):
 for i,data in enumerate(sample_np):
     clusters['cluster{0}'.format(data_as_df.values[i][0])].append(data)
 
+# dataframe for heatmap
+heatmap=pd.DataFrame()
+
 for cluster in clusters:
     # number of cluster
     print(color.BOLD + color.RED+ cluster+ color.END)
@@ -87,7 +93,9 @@ for cluster in clusters:
             diff.at[i]=value/lower_max[i]*100
 
     print(color.BOLD +color.BLUE+'\nAverage deviation of features (%):'+ color.END)
-    print(diff.sort_values().to_string())
+    diff = diff.sort_values()
+    print(diff.to_string())
+    heatmap=pd.concat([heatmap,diff.rename(cluster)],axis=1)
     
     # correlation of features
     print(color.BOLD +color.BLUE+'\nCorrelation of features:'+ color.END)
@@ -102,3 +110,9 @@ for cluster in clusters:
     print(color.BOLD + color.BLUE+'\nSize of cluster:'+ color.END)
     print(len(clusters[cluster]),'\n')
     
+print(heatmap)
+graph=sns.heatmap(heatmap,cmap="coolwarm", cbar_kws={"label":"[%]"})
+graph.set(xlabel='Clusters', ylabel='Features')
+graph.set_xticklabels(graph.get_xticklabels(), rotation=45)
+fig=graph.get_figure()
+fig.savefig("heatmap_agr.pdf",bbox_inches='tight')
