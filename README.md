@@ -22,7 +22,7 @@
 
 - report je tvořen obecně (rozptyl, průměr, korelace → možnost rozšíření), aby se dal aplikovat na kterákoliv vstupní data
 
-    ![image](./report_principle.png)
+    ![image](./pic/report_principle.png)
 
 ## Myšlenky využití a možné problémy
 
@@ -120,4 +120,4 @@
 
 - Například cluster 4 vykazuje nadprůměrné zastoupení číslic
 
-![image](./x_means_new.PNG)
+![image](./pic/x_means_new.PNG)
