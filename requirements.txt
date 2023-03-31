@@ -6,3 +6,5 @@ seaborn
 sklearn
 tqdm 
 joblib
+imblearn
+yellowbrick
