@@ -6,10 +6,6 @@
     
         pip install -r requirements.txt 
 
--  spuštění skriptu na ukázkových datech
-    
-        python report.py sample_data.csv  
-
 ## Princip
 
 - implementace skriptu, který shlukuje data na základě jejich atributů
