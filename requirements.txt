@@ -1,10 +1,10 @@
 numpy
 pandas
--f http://h2o-release.s3.amazonaws.com/h2o/latest_stable_Py.html 
+-f https://h2o-release.s3.amazonaws.com/h2o/latest_stable_Py.html 
 h2o
+matplotlib
 seaborn
-sklearn
-tqdm 
+scikit-learn
 joblib
 imblearn
 yellowbrick
